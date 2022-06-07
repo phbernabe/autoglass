@@ -16,9 +16,9 @@ namespace DesafioAutoglass.Data.Repositories
         public IEnumerable<Produto> Buscar(string descricao = null, DateTime? validoAte = null, string descricaoFornecedor = null, string cnpjFornecedor = null, int skip = 0, int count = 20)
         {
             var query = GetAll().Where(x =>
-                (string.IsNullOrEmpty(descricao) || x.Descricao.ToUpper().Contains(descricao.ToUpper())) ||
-                (string.IsNullOrEmpty(descricaoFornecedor) || x.Fornecedor.Descricao.ToUpper().Contains(descricaoFornecedor.ToUpper())) ||
-                (string.IsNullOrEmpty(cnpjFornecedor) || x.Fornecedor.Cnpj.Equals(cnpjFornecedor)) ||
+                (string.IsNullOrEmpty(descricao) || x.Descricao.ToUpper().Contains(descricao.ToUpper())) &&
+                (string.IsNullOrEmpty(descricaoFornecedor) || x.Fornecedor.Descricao.ToUpper().Contains(descricaoFornecedor.ToUpper())) &&
+                (string.IsNullOrEmpty(cnpjFornecedor) || x.Fornecedor.Cnpj.Equals(cnpjFornecedor)) &&
                 (!validoAte.HasValue || x.DataValidade <= validoAte.Value)
             )
                 .Skip(skip)
